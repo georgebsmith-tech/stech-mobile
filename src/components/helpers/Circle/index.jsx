@@ -1,7 +1,12 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-export function Circle({ children, size = 40, bg = "rgba(255, 249, 238, 1)" }) {
+export function Circle({
+  children,
+  size = 40,
+  bg = "rgba(255, 249, 238, 1)",
+  style = {}
+}) {
   return (
     <View
       style={{
@@ -11,6 +16,7 @@ export function Circle({ children, size = 40, bg = "rgba(255, 249, 238, 1)" }) {
         borderRadius: 100,
         alignContent: "center",
         justifyContent: "center",
+        ...style
       }}
     >
       {children}

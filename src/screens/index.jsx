@@ -4,3 +4,7 @@ export * from "./auth/SignUp";
 export * from "./main/Home";
 export * from "./main/DetailedReport";
 export * from "./main/Success";
+export * from "./main/Profile";
+export * from "./main/ChangePassword";
+export * from "./main/AccountDetails";
+export * from "./main/Reports";

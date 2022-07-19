@@ -15,7 +15,7 @@ export function DetailedReport({ navigation, route }) {
         backgroundColor: "#EDFFF7",
         minHeight: SIZES.height,
         padding: 16,
-        paddingTop: 70,
+        paddingTop: 70
       }}
     >
       <View>
@@ -24,7 +24,7 @@ export function DetailedReport({ navigation, route }) {
             color: COLORS.grey1,
             fontWeight: "600",
             fontSize: 18,
-            textAlign: "center",
+            textAlign: "center"
           }}
         >
           Medical Report
@@ -37,14 +37,14 @@ export function DetailedReport({ navigation, route }) {
             borderRadius: 10,
             borderBottomWidth: 1,
             borderColor: COLORS.grey1,
-            padding: 15,
+            padding: 15
           }}
         >
           <Text
             style={{
               color: COLORS.grey1,
               fontWeight: "600",
-              fontSize: 16,
+              fontSize: 16
             }}
           >
             Student's Profile
@@ -53,18 +53,18 @@ export function DetailedReport({ navigation, route }) {
             {[
               {
                 title: "Name",
-                value: report.student.name,
+                value: report.student.name
               },
               { title: "Mat. No.", value: report.student.matNo },
               { title: "Contact", value: report.student.phone },
 
-              { title: "Dept", value: report.student.dept },
+              { title: "Dept", value: report.student.dept }
             ].map((item, idx) => (
               <View
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
-                  marginBottom: 10,
+                  marginBottom: 10
                 }}
               >
                 <Text style={{ color: "rgba(111, 121, 117, 1)" }}>
@@ -82,7 +82,7 @@ export function DetailedReport({ navigation, route }) {
             style={{
               color: COLORS.grey1,
               fontWeight: "600",
-              fontSize: 16,
+              fontSize: 16
             }}
           >
             Report
@@ -97,23 +97,22 @@ export function DetailedReport({ navigation, route }) {
               {
                 title: "Reported By.",
                 value:
-                  report?.addedBy?.lastName + " " + report?.addedBy?.firstName,
+                  report?.addedBy?.lastName + " " + report?.addedBy?.firstName
               },
               {
                 title: "Reported On.",
-                value:
-                  getDate(report.createdAt) + ` (${toWhen(report.createdAt)})`,
+                value: getDate(report.createdAt)
               },
 
               { title: "Phone", value: report.addedBy.phone },
 
-              { title: "Email", value: report.addedBy.email },
+              { title: "Email", value: report.addedBy.email }
             ].map((item, idx) => (
               <View
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
-                  marginBottom: 10,
+                  marginBottom: 10
                 }}
               >
                 <Text style={{ color: "rgba(111, 121, 117, 1)" }}>
@@ -123,7 +122,7 @@ export function DetailedReport({ navigation, route }) {
                   style={{
                     color: COLORS.grey1,
                     fontWeight: "500",
-                    fontSize: 13,
+                    fontSize: 13
                   }}
                 >
                   {item.value}

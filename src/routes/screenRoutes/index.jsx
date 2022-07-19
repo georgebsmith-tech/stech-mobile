@@ -5,4 +5,8 @@ export const screenRoutes = {
   SignUp: "SignUp",
   DetailedReport: "DetailedReport",
   Success: "Success",
+  Profile: "Profile",
+  ChangePassword: "ChangePassword",
+  AccountDetails: "AccountDetails",
+  Reports: "Reports"
 };

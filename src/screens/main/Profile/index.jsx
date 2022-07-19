@@ -13,7 +13,7 @@ import { UserContext } from "../../../contexts";
 import { getProtectedData } from "../../../utils/services/getServices";
 import { getDate } from "../../../utils/helpers/dateAndTime/getDate";
 
-export function Home({ navigation }) {
+export function Profile({ navigation }) {
   const { user } = useContext(UserContext);
   console.log(user);
   const [reports, setReports] = useState([]);
@@ -25,7 +25,7 @@ export function Home({ navigation }) {
         const token = await AsyncStorage.getItem("token");
         console.log(token);
         console.log("here");
-        const data = await getProtectedData("/reports?limit=5", {}, token);
+        const data = await getProtectedData("/reports", {}, token);
         console.log(data);
         setReports(data.data.reports);
         setTotal(data.data.count);
@@ -56,75 +56,83 @@ export function Home({ navigation }) {
         paddingTop: 70
       }}
     >
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: 40
-        }}
-      >
-        <Text style={{ fontSize: 20, color: "rgba(25, 32, 29, 1)" }}>
-          <Text>Welcome,</Text>{" "}
-          <Text style={{ color: "rgba(25, 32, 29, 1)", fontWeight: "900" }}>
-            {user.firstName && user?.firstName}
-          </Text>
+      <View style={{ alignItems: "center", marginBottom: 30 }}>
+        <Text style={{ fontSize: 16, color: "#19201D", fontWeight: "600" }}>
+          Profile
         </Text>
-        <View
-          style={{
-            width: 40,
-            height: 40,
-            backgroundColor: "rgba(25, 32, 29, 1)",
-            borderRadius: 100,
-            alignContent: "center",
-            justifyContent: "center"
-          }}
-        >
-          <Text
-            style={{ color: "#fff", fontWeight: "900", textAlign: "center" }}
-          >
-            {(user?.firstName[0] + user?.lastName[0]).toUpperCase()}
-          </Text>
-        </View>
       </View>
+
       <ScrollView showsVerticalScrollIndicator={false}>
         <View
           style={{
             backgroundColor: "rgba(25, 32, 29, 1)",
             alignItems: "center",
-            padding: 35,
+            padding: 20,
             borderRadius: 6
           }}
         >
-          <Text style={{ color: "rgba(172, 189, 181, 1)", marginBottom: 10 }}>
-            Total Number of Reports
-          </Text>
-          <Text style={{ color: "#fff" }}>{total}</Text>
-        </View>
-        <View>
+          <Circle
+            bg="rgba(34, 41, 38, 1)"
+            size={72}
+            style={{ marginBottom: 16 }}
+          >
+            <Text
+              style={{
+                color: "#fff",
+                textAlign: "center",
+                fontSize: 20,
+                fontWeight: "600"
+              }}
+            >
+              {user.firstName[0] + user.lastName[0]}
+            </Text>
+          </Circle>
           <Text
             style={{
-              color: COLORS.grey2,
-              fontSize: 16,
-              marginTop: 24,
-              marginBottom: 28
+              color: "#fff",
+              marginBottom: 4,
+              fontWeight: "600",
+              fontSize: 16
             }}
           >
-            Recent Reports
+            {`${user.firstName} ${user.lastName}`}
           </Text>
+          <Text
+            style={{
+              color: "#fff",
+              marginBottom: 4,
+              fontWeight: "400",
+              fontSize: 12
+            }}
+          >
+            Account details
+          </Text>
+        </View>
+        <View style={{ marginTop: 17 }}>
           <ScrollView showsVerticalScrollIndicator={false}>
-            {reports.map((report, idx) => (
+            {[
+              {
+                title: "Change Password",
+                text: "Essential bank information",
+                screen: screenRoutes.ChangePassword
+              },
+              {
+                title: "Edit Profile",
+                text: "Modify your user profile",
+                screen: screenRoutes.AccountDetails
+              }
+            ].map((tab, idx) => (
               <TouchableOpacity
                 key={idx}
                 style={{
                   flexDirection: "row",
                   alignItems: "center",
                   justifyContent: "space-between",
-                  marginBottom: 24
+                  marginBottom: 10,
+                  backgroundColor: "#F9F9F9",
+                  padding: 21
                 }}
-                onPress={() =>
-                  navigation.push(screenRoutes.DetailedReport, { report })
-                }
+                onPress={() => navigation.push(tab.screen)}
               >
                 <View
                   style={{
@@ -140,34 +148,22 @@ export function Home({ navigation }) {
                         textAlign: "center"
                       }}
                     >
-                      {report?.student?.name[0]}
+                      {tab.title[0]}
                     </Text>
                   </Circle>
                   <View style={{ marginLeft: 15 }}>
                     <Text style={{ color: COLORS.grey1, fontWeight: "700" }}>
-                      {report?.student?.name}
+                      {tab.title}
                     </Text>
                     <Text style={{ fontSize: 12, color: "rgba(0,56,34,0.7)" }}>
-                      {report?.student?.matNo}
+                      {tab.text}
                     </Text>
                   </View>
                 </View>
-                <View>
-                  <Text style={{ textAlign: "right", fontSize: 13 }}>
-                    {report?.student?.dept}
-                  </Text>
-                  <Text
-                    style={{
-                      textAlign: "right",
-                      fontSize: 10,
-                      color: COLORS.grey2
-                    }}
-                  >
-                    {getDate(report?.createdAt)}
-                  </Text>
-                </View>
+                <View></View>
               </TouchableOpacity>
             ))}
+            <View style={{ height: 150 }} />
           </ScrollView>
         </View>
       </ScrollView>

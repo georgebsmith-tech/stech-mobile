@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
 import { Image } from "react-native";
-import { Home } from "../../../screens";
+import { Home, Profile, Reports } from "../../../screens";
 const Tab = createBottomTabNavigator();
 
 export const BottomTabNav = () => {
@@ -22,14 +22,14 @@ export const BottomTabNav = () => {
           paddingTop: 0,
           backgroundColor: "rgba(23, 30, 27, 1)",
           position: "absolute",
-          borderTopWidth: 0,
-        },
+          borderTopWidth: 0
+        }
       })}
       tabBarOptions={{
         activeTintColor: "red",
         inactiveTintColor: "gray",
         showLabel: true,
-        style: { backgroundColor: "red" },
+        style: { backgroundColor: "red" }
       }}
     >
       <Tab.Screen
@@ -47,12 +47,12 @@ export const BottomTabNav = () => {
                 source={require("../../../../assets/images/home-inactive.png")}
               />
             ),
-          tabBarLabelStyle: { color: "#fff" },
+          tabBarLabelStyle: { color: "#fff" }
         }}
       />
       <Tab.Screen
         name="Reports"
-        component={Home}
+        component={Reports}
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) =>
@@ -65,12 +65,12 @@ export const BottomTabNav = () => {
                 source={require("../../../../assets/images/reports-inactive.png")}
               />
             ),
-          tabBarLabelStyle: { color: "#fff" },
+          tabBarLabelStyle: { color: "#fff" }
         }}
       />
       <Tab.Screen
         name="Profile"
-        component={Home}
+        component={Profile}
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) =>
@@ -83,7 +83,7 @@ export const BottomTabNav = () => {
                 source={require("../../../../assets/images/profile-inactive.png")}
               />
             ),
-          tabBarLabelStyle: { color: "#fff" },
+          tabBarLabelStyle: { color: "#fff" }
         }}
       />
       <Tab.Screen
@@ -101,7 +101,7 @@ export const BottomTabNav = () => {
                 source={require("../../../../assets/images/more-inactive.png")}
               />
             ),
-          tabBarLabelStyle: { color: "#fff" },
+          tabBarLabelStyle: { color: "#fff" }
         }}
       />
       {/* <UserTab.Screen

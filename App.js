@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
 import { UserContextProvider } from "./src/contexts";
 import { Navigation } from "./src/routes";
+import { Profile } from "./src/screens";
 
 export default function App() {
   return (
@@ -15,6 +16,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
-  },
+    justifyContent: "center"
+  }
 });

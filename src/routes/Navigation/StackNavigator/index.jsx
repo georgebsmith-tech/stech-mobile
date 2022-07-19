@@ -3,12 +3,13 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
+  AccountDetails,
+  ChangePassword,
   DetailedReport,
-  Home,
   SignIn,
   SignUp,
   Splash,
-  Success,
+  Success
 } from "../../../screens";
 import { BottomTabNav } from "../..";
 
@@ -23,6 +24,8 @@ export function Navigation() {
     { name: "SignUp", component: SignUp },
     { name: "DetailedReport", component: DetailedReport },
     { name: "Success", component: Success },
+    { name: "ChangePassword", component: ChangePassword },
+    { name: "AccountDetails", component: AccountDetails }
   ];
   return (
     <NavigationContainer>

@@ -13,7 +13,7 @@ import { UserContext } from "../../../contexts";
 import { getProtectedData } from "../../../utils/services/getServices";
 import { getDate } from "../../../utils/helpers/dateAndTime/getDate";
 
-export function Home({ navigation }) {
+export function Reports({ navigation }) {
   const { user } = useContext(UserContext);
   console.log(user);
   const [reports, setReports] = useState([]);
@@ -25,7 +25,7 @@ export function Home({ navigation }) {
         const token = await AsyncStorage.getItem("token");
         console.log(token);
         console.log("here");
-        const data = await getProtectedData("/reports?limit=5", {}, token);
+        const data = await getProtectedData("/reports", {}, token);
         console.log(data);
         setReports(data.data.reports);
         setTotal(data.data.count);
@@ -59,59 +59,23 @@ export function Home({ navigation }) {
       <View
         style={{
           flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
+          justifyContent: "center",
+
           marginBottom: 40
         }}
       >
-        <Text style={{ fontSize: 20, color: "rgba(25, 32, 29, 1)" }}>
-          <Text>Welcome,</Text>{" "}
-          <Text style={{ color: "rgba(25, 32, 29, 1)", fontWeight: "900" }}>
-            {user.firstName && user?.firstName}
-          </Text>
-        </Text>
-        <View
+        <Text
           style={{
-            width: 40,
-            height: 40,
-            backgroundColor: "rgba(25, 32, 29, 1)",
-            borderRadius: 100,
-            alignContent: "center",
-            justifyContent: "center"
+            textAlign: "center",
+            fontSize: 20,
+            color: "rgba(25, 32, 29, 1)"
           }}
         >
-          <Text
-            style={{ color: "#fff", fontWeight: "900", textAlign: "center" }}
-          >
-            {(user?.firstName[0] + user?.lastName[0]).toUpperCase()}
-          </Text>
-        </View>
+          All Reports
+        </Text>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View
-          style={{
-            backgroundColor: "rgba(25, 32, 29, 1)",
-            alignItems: "center",
-            padding: 35,
-            borderRadius: 6
-          }}
-        >
-          <Text style={{ color: "rgba(172, 189, 181, 1)", marginBottom: 10 }}>
-            Total Number of Reports
-          </Text>
-          <Text style={{ color: "#fff" }}>{total}</Text>
-        </View>
         <View>
-          <Text
-            style={{
-              color: COLORS.grey2,
-              fontSize: 16,
-              marginTop: 24,
-              marginBottom: 28
-            }}
-          >
-            Recent Reports
-          </Text>
           <ScrollView showsVerticalScrollIndicator={false}>
             {reports.map((report, idx) => (
               <TouchableOpacity
