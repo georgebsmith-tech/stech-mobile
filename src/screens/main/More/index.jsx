@@ -1,0 +1,134 @@
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  AsyncStorage
+} from "react-native";
+import React, { useContext, useEffect, useState } from "react";
+import { COLORS, SIZES } from "../../../config";
+import { Button, Circle, Input } from "../../../components";
+import { screenRoutes } from "../../../routes";
+import { UserContext } from "../../../contexts";
+import { getProtectedData } from "../../../utils/services/getServices";
+import { getDate } from "../../../utils/helpers/dateAndTime/getDate";
+
+export function More({ navigation }) {
+  const { user } = useContext(UserContext);
+  console.log(user);
+  const [reports, setReports] = useState([]);
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    (async function getReports() {
+      try {
+        const token = await AsyncStorage.getItem("token");
+        console.log(token);
+        console.log("here");
+        const data = await getProtectedData("/reports", {}, token);
+        console.log(data);
+        setReports(data.data.reports);
+        setTotal(data.data.count);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
+  if (!user.firstName) {
+    return (
+      <View
+        style={{
+          height: SIZES.height,
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
+  return (
+    <View
+      style={{
+        backgroundColor: "#fff",
+        minHeight: SIZES.height,
+
+        paddingTop: 70
+      }}
+    >
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "center",
+
+          marginBottom: 40
+        }}
+      >
+        <Text
+          style={{
+            textAlign: "center",
+            fontSize: 20,
+            color: "rgba(25, 32, 29, 1)"
+          }}
+        >
+          More
+        </Text>
+      </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            {[
+              {
+                title: "Add medical report",
+                text: "Add a new medical report for a student",
+                screen: screenRoutes.NewReport
+              }
+            ].map((tab, idx) => (
+              <TouchableOpacity
+                key={idx}
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  marginBottom: 10,
+                  backgroundColor: "#F9F9F9",
+                  padding: 21
+                }}
+                onPress={() => navigation.push(tab.screen)}
+              >
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center"
+                  }}
+                >
+                  <Circle size={48} bg="rgba(215, 223, 219, 1)">
+                    <Text
+                      style={{
+                        color: COLORS.grey1,
+                        fontWeight: "900",
+                        textAlign: "center"
+                      }}
+                    >
+                      {tab.title[0]}
+                    </Text>
+                  </Circle>
+                  <View style={{ marginLeft: 15 }}>
+                    <Text style={{ color: COLORS.grey1, fontWeight: "700" }}>
+                      {tab.title}
+                    </Text>
+                    <Text style={{ fontSize: 12, color: "rgba(0,56,34,0.7)" }}>
+                      {tab.text}
+                    </Text>
+                  </View>
+                </View>
+                <View></View>
+              </TouchableOpacity>
+            ))}
+            <View style={{ height: 150 }} />
+          </ScrollView>
+        </View>
+      </ScrollView>
+    </View>
+  );
+}

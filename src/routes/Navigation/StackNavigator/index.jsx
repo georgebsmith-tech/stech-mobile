@@ -6,6 +6,7 @@ import {
   AccountDetails,
   ChangePassword,
   DetailedReport,
+  NewReport,
   SignIn,
   SignUp,
   Splash,
@@ -25,7 +26,8 @@ export function Navigation() {
     { name: "DetailedReport", component: DetailedReport },
     { name: "Success", component: Success },
     { name: "ChangePassword", component: ChangePassword },
-    { name: "AccountDetails", component: AccountDetails }
+    { name: "AccountDetails", component: AccountDetails },
+    { name: "NewReport", component: NewReport }
   ];
   return (
     <NavigationContainer>

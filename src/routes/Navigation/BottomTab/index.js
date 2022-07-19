@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
 import { Image } from "react-native";
-import { Home, Profile, Reports } from "../../../screens";
+import { Home, More, Profile, Reports } from "../../../screens";
 const Tab = createBottomTabNavigator();
 
 export const BottomTabNav = () => {
@@ -88,7 +88,7 @@ export const BottomTabNav = () => {
       />
       <Tab.Screen
         name="More"
-        component={Home}
+        component={More}
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) =>

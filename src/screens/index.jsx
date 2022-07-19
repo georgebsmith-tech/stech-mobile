@@ -8,3 +8,5 @@ export * from "./main/Profile";
 export * from "./main/ChangePassword";
 export * from "./main/AccountDetails";
 export * from "./main/Reports";
+export * from "./main/More";
+export * from "./main/NewReport";

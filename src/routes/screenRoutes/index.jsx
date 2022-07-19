@@ -8,5 +8,6 @@ export const screenRoutes = {
   Profile: "Profile",
   ChangePassword: "ChangePassword",
   AccountDetails: "AccountDetails",
-  Reports: "Reports"
+  Reports: "Reports",
+  NewReport: "NewReport"
 };
