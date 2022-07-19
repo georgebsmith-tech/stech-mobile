@@ -43,7 +43,7 @@ export function NewReport({ navigation }) {
       if (data.error) {
         showToast({
           type: "error",
-          text1: "Login Error",
+          text1: "Report Error",
           text2: data.error.message
         });
         setIsLoading(false);
