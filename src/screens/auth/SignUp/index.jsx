@@ -4,7 +4,7 @@ import {
   ScrollView,
   TouchableOpacity,
   ActivityIndicator,
-  AsyncStorage,
+  AsyncStorage
 } from "react-native";
 import React, { useContext, useState } from "react";
 import { COLORS, SIZES } from "../../../config";
@@ -22,7 +22,9 @@ export function SignUp({ navigation }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
+  const [title, setTitle] = useState("");
   const [gender, setGender] = useState("");
+
   const [isLoading, setIsLoading] = useState(false);
 
   const [as, setAs] = useState("");
@@ -31,7 +33,7 @@ export function SignUp({ navigation }) {
     Toast.show({
       type,
       text1,
-      text2,
+      text2
     });
   };
   const body = {
@@ -40,8 +42,9 @@ export function SignUp({ navigation }) {
     firstName,
     lastName,
     phone,
-    as: access[as],
+    as,
     gender: gender.toLowerCase(),
+    title
   };
 
   const handleRegister = async () => {
@@ -54,14 +57,14 @@ export function SignUp({ navigation }) {
         showToast({
           type: "error",
           text1: "Registration Error",
-          text2: data.error.message,
+          text2: data.error.message
         });
         return;
       }
       showToast({
         type: "success",
         text1: "Congrats",
-        text2: "Your Registration was successful",
+        text2: "Your Registration was successful"
       });
       // AsyncStorage.setItem("token", data.token);
       navigation.replace(screenRoutes.Success);
@@ -71,8 +74,8 @@ export function SignUp({ navigation }) {
       console.log(error);
       showToast({
         type: "error",
-        text1: "Login Error",
-        text2: error.error.message,
+        text1: "Registration Error",
+        text2: error.error.message
       });
       setIsLoading(false);
       return;
@@ -84,7 +87,7 @@ export function SignUp({ navigation }) {
         backgroundColor: "#fff",
         minHeight: SIZES.height,
         padding: 38,
-        paddingTop: 100,
+        paddingTop: 100
       }}
     >
       {/* Toaster */}
@@ -100,7 +103,7 @@ export function SignUp({ navigation }) {
                 backgroundColor: "#fff",
                 padding: 15,
                 borderRadius: 14,
-                width: "100%",
+                width: "100%"
               }}
             >
               <Text>I am the modal content!</Text>
@@ -114,7 +117,7 @@ export function SignUp({ navigation }) {
             color: "rgba(25, 32, 29, 1)",
             fontWeight: "900",
             fontSize: 24,
-            marginBottom: 8,
+            marginBottom: 8
           }}
         >
           Hello, welcome
@@ -125,7 +128,7 @@ export function SignUp({ navigation }) {
             fontWeight: "400",
             fontSize: 16,
             textAlign: "center",
-            width: 208,
+            width: 208
           }}
         >
           Please enter your details to create an account!!
@@ -154,16 +157,27 @@ export function SignUp({ navigation }) {
         <Select
           options={[
             { label: "Male", value: "male" },
-            { label: "Female", value: "female" },
+            { label: "Female", value: "female" }
           ]}
           value={gender}
           setValue={setGender}
         />
         <Select
+          title="Your Title:"
+          options={[
+            { label: "Mr.", value: "Mr." },
+            { label: "Mrs", value: "Mrs" },
+            { label: "Dr.", value: "Dr." },
+            { label: "Prof.", value: "Prof." }
+          ]}
+          value={title}
+          setValue={setTitle}
+        />
+        <Select
           title="Register as a:"
           options={[
-            { label: "Hospital", value: "hospital" },
-            { label: "Lecturer/Campus Official", value: "staff" },
+            { label: "Health care official", value: "Health care official" },
+            { label: "Lecturer", value: "Lecturer" }
           ]}
           value={as}
           setValue={setAs}
@@ -189,7 +203,7 @@ export function SignUp({ navigation }) {
             fontSize: 16,
             marginTop: 40,
             justifyContent: "center",
-            flexDirection: "row",
+            flexDirection: "row"
           }}
         >
           <Text style={{ color: "rgba(18, 18, 18, 1)" }}>
@@ -203,7 +217,7 @@ export function SignUp({ navigation }) {
               style={{
                 color: COLORS.primary1,
                 fontWeight: "700",
-                fontSize: 16,
+                fontSize: 16
               }}
             >
               Sign in

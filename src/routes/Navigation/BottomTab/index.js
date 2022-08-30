@@ -1,10 +1,13 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import React from "react";
+import React, { useContext } from "react";
 import { Image } from "react-native";
+import { UserContext } from "../../../contexts";
 import { Home, More, Profile, Reports } from "../../../screens";
 const Tab = createBottomTabNavigator();
 
 export const BottomTabNav = () => {
+  const { user, setUser } = useContext(UserContext);
+  console.log(user);
   return (
     <Tab.Navigator
       //   screenOptions={({ route }) => (
@@ -86,24 +89,27 @@ export const BottomTabNav = () => {
           tabBarLabelStyle: { color: "#fff" }
         }}
       />
-      <Tab.Screen
-        name="More"
-        component={More}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ focused }) =>
-            focused ? (
-              <Image
-                source={require("../../../../assets/images/more-active.png")}
-              />
-            ) : (
-              <Image
-                source={require("../../../../assets/images/more-inactive.png")}
-              />
-            ),
-          tabBarLabelStyle: { color: "#fff" }
-        }}
-      />
+      {user.role == "hospital" && (
+        <Tab.Screen
+          name="More"
+          component={More}
+          options={{
+            headerShown: false,
+            tabBarIcon: ({ focused }) =>
+              focused ? (
+                <Image
+                  source={require("../../../../assets/images/more-active.png")}
+                />
+              ) : (
+                <Image
+                  source={require("../../../../assets/images/more-inactive.png")}
+                />
+              ),
+            tabBarLabelStyle: { color: "#fff" }
+          }}
+        />
+      )}
+
       {/* <UserTab.Screen
         name="Chat"
         component={Chats}

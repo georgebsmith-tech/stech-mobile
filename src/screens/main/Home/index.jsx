@@ -18,6 +18,7 @@ export function Home({ navigation }) {
   console.log(user);
   const [reports, setReports] = useState([]);
   const [total, setTotal] = useState(0);
+  const [showLogOut, setShowLogOut] = useState(false);
 
   useEffect(() => {
     (async function getReports() {
@@ -70,7 +71,8 @@ export function Home({ navigation }) {
             {user.firstName && user?.firstName}
           </Text>
         </Text>
-        <View
+        <TouchableOpacity
+          onPress={() => setShowLogOut(!showLogOut)}
           style={{
             width: 40,
             height: 40,
@@ -85,7 +87,25 @@ export function Home({ navigation }) {
           >
             {(user?.firstName[0] + user?.lastName[0]).toUpperCase()}
           </Text>
-        </View>
+        </TouchableOpacity>
+        {showLogOut && (
+          <View
+            style={{
+              position: "absolute",
+              ZIndex: 10,
+              right: 10,
+              top: 45,
+              backroundColor: "#fff",
+              elevation: 4
+            }}
+          >
+            <TouchableOpacity
+              onPress={() => navigation.replace(screenRoutes.SignIn)}
+            >
+              <Text>Log Out</Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View

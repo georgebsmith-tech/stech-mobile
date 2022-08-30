@@ -6,7 +6,7 @@ import {
 } from "react-native";
 import React, { useContext, useState } from "react";
 import { COLORS, SIZES } from "../../../config";
-import { Button, HeaderWithBackBtn, Input } from "../../../components";
+import { Button, HeaderWithBackBtn, Input, Select } from "../../../components";
 import { screenRoutes } from "../../../routes";
 import { postProtectedData } from "../../../utils/services/postServices";
 import { UserContext } from "../../../contexts";
@@ -18,12 +18,20 @@ export function NewReport({ navigation }) {
   const [dept, setDept] = useState("");
   const [phone, setPhone] = useState("");
   const [report, setReport] = useState("");
+  const [gender, setGender] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
 
   const { user, setUser } = useContext(UserContext);
 
-  const body = { phone, name, dept, report, matNo };
+  const body = {
+    phone,
+    name,
+    dept,
+    report,
+    matNo,
+    gender: gender.toLowerCase()
+  };
 
   const showToast = ({ type, text1, text2 }) => {
     Toast.show({
@@ -61,7 +69,7 @@ export function NewReport({ navigation }) {
       console.log(error);
       showToast({
         type: "error",
-        text1: "Login Error",
+        text1: "Report Error",
         text2: error.error.message
       });
       setIsLoading(false);
@@ -89,6 +97,14 @@ export function NewReport({ navigation }) {
             value={name}
             title="Student's name"
             placeholder="Enter Student's name"
+          />
+          <Select
+            options={[
+              { label: "Male", value: "male" },
+              { label: "Female", value: "female" }
+            ]}
+            value={gender}
+            setValue={setGender}
           />
           <Input
             title="Matriculation number"

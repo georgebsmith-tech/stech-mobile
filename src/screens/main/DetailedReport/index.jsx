@@ -58,7 +58,8 @@ export function DetailedReport({ navigation, route }) {
               { title: "Mat. No.", value: report.student.matNo },
               { title: "Contact", value: report.student.phone },
 
-              { title: "Dept", value: report.student.dept }
+              { title: "Dept", value: report.student.dept },
+              { title: "Gender", value: report.student.gender }
             ].map((item, idx) => (
               <View
                 style={{
@@ -104,9 +105,9 @@ export function DetailedReport({ navigation, route }) {
                 value: getDate(report.createdAt)
               },
 
-              { title: "Phone", value: report.addedBy.phone },
+              { title: "Phone", value: report.addedBy.phone }
 
-              { title: "Email", value: report.addedBy.email }
+              // { title: "Email", value: report.addedBy.email }
             ].map((item, idx) => (
               <View
                 style={{
