@@ -24,6 +24,7 @@ export function SignUp({ navigation }) {
   const [phone, setPhone] = useState("");
   const [title, setTitle] = useState("");
   const [gender, setGender] = useState("");
+  const [hospital, setHospital] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -36,18 +37,21 @@ export function SignUp({ navigation }) {
       text2
     });
   };
-  const body = {
-    email,
-    password,
-    firstName,
-    lastName,
-    phone,
-    as,
-    gender: gender.toLowerCase(),
-    title
-  };
 
   const handleRegister = async () => {
+    const body = {
+      email,
+      password,
+      firstName,
+      lastName,
+      phone,
+      as,
+      gender: gender.toLowerCase(),
+      title
+    };
+    if (as === "Health care official") {
+      body.hospital = hospital;
+    }
     try {
       console.log(body);
       setIsLoading(true);
@@ -182,6 +186,25 @@ export function SignUp({ navigation }) {
           value={as}
           setValue={setAs}
         />
+        {as === "Health care official" && (
+          <Select
+            title="Choose Hospital:"
+            options={[
+              { label: "Fetha 1", value: "Fetha 1" },
+              { label: "Fetha 2", value: "Fetha 2" },
+              {
+                label: "Evangel university clinic",
+                value: "Evangel university clinic"
+              },
+              {
+                label: "University of Nigeria teaching hospital enugu",
+                value: "University of Nigeria teaching hospital enugu"
+              }
+            ]}
+            value={hospital}
+            setValue={setHospital}
+          />
+        )}
 
         <Input onChangeText={(text) => setEmail(text)} />
         <Input

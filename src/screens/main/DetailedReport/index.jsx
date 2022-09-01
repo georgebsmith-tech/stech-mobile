@@ -94,11 +94,18 @@ export function DetailedReport({ navigation, route }) {
           </Text>
           <View style={{ marginTop: 20 }}>
             {[
-              { title: "Hospital", value: "St. Batpist" },
+              {
+                title: "Hospital",
+                value: report?.addedBy?.hospital || "Confidential"
+              },
               {
                 title: "Reported By.",
                 value:
-                  report?.addedBy?.lastName + " " + report?.addedBy?.firstName
+                  (report?.addedBy?.title || "Dr.") +
+                  " " +
+                  report?.addedBy?.lastName +
+                  " " +
+                  report?.addedBy?.firstName
               },
               {
                 title: "Reported On.",
